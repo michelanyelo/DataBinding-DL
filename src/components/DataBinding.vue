@@ -3,7 +3,8 @@ export default {
     name: 'DataBinding',
     data() {
         return {
-            backgroundBox: ''
+            backgroundBox: '',
+            textColor: ''
         }
     }
 }
@@ -14,9 +15,11 @@ export default {
         <div class="selectores">
             <label for="backgroundBox">Color de fondo: </label>
             <input id="backgroundBox" type="text" v-model="backgroundBox">
+            <label for="textColor">Color de texto: </label>
+            <input id="textColor" type="text" v-model="textColor">
         </div>
         <div class="box" :style="{ backgroundColor: backgroundBox }">
-
+            <p :style="{ color: textColor }">Awesome Vue.js</p>
         </div>
     </div>
 </template>
