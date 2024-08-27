@@ -7,6 +7,7 @@ export default {
             textColor: '',
             showTexto: false,
             borderBox: '0',
+            borderColor: ''
         }
     }
 }
@@ -23,9 +24,11 @@ export default {
             <input id="mostrarTextoCheck" type="checkbox" v-model="showTexto">
             <label for="borderTextoRange">Borde: </label>
             <input id="borderTextoRange" type="range" min="0" max="10" v-model="borderBox">
+            <label for="borderColorInput">Color de borde: </label>
+            <input id="borderColorInput" type="text" v-model="borderColor">  
 
         </div>
-        <div class="box" :style="{ backgroundColor: backgroundBox, border: borderBox + 'px solid' }">
+        <div class="box" :style="{ backgroundColor: backgroundBox, border: borderBox + 'px solid', borderColor: borderColor }">
             <p :style="{ color: textColor }" v-show="showTexto">Awesome Vue.js</p>
         </div>
     </div>
@@ -56,6 +59,5 @@ export default {
 .box {
     height: 100px;
     width: 100px;
-    border: 1px;
 }
 </style>
