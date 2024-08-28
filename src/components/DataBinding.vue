@@ -11,7 +11,8 @@ export default {
             borderColor: '',
             textContent: '',
             typoStyle: '',
-            fontStyle: ['normal', 'italic', 'oblique']
+            fontStyle: ['normal', 'italic', 'oblique'],
+            opacityBox: false
         }
     }
 }
@@ -24,10 +25,10 @@ export default {
             <input id="backgroundBoxInput" type="text" v-model="backgroundBox">
             <label for="textColorInput">Color de texto: </label>
             <input id="textColorInput" type="text" v-model="textColor">
-            <label for="mostrarTextoCheck">Mostrar texto: </label>
-            <input id="mostrarTextoCheck" type="checkbox" v-model="showTexto">
-            <label for="borderTextoRange">Borde: </label>
-            <input id="borderTextoRange" type="range" min="0" max="10" v-model="borderBox">
+            <label for="mostrarTextCheck">Mostrar texto: </label>
+            <input id="mostrarTextCheck" type="checkbox" v-model="showTexto">
+            <label for="borderTextRange">Borde: </label>
+            <input id="borderTextRange" type="range" min="0" max="10" v-model="borderBox">
             <label for="borderRadiusRange">Borde redondeado: </label>
             <input id="borderRadiusRange" type="range" min="0" max="50" v-model="borderRadiusBox">
             <label for="borderColorInput">Color de borde: </label>
@@ -38,11 +39,11 @@ export default {
             <select id="typoTextSelect" v-model="typoStyle">
                 <option v-for="(style, idx) in fontStyle" :key="idx" :value="style">{{ style }}</option>
             </select>
-
-
+            <label for="opacityBoxCheck">Opaco: </label>
+            <input id="opacityBoxCheck" type="checkbox" v-model="opacityBox">
         </div>
-        <div class="box"
-            :style="{ backgroundColor: backgroundBox, border: borderBox + 'px solid', borderRadius: borderRadiusBox + 'px', borderColor: borderColor }">
+        <div :class="{ 'box-block': backgroundBox }" :v-show="!backgroundBox"
+            :style="{ backgroundColor: backgroundBox, border: borderBox + 'px solid', borderRadius: borderRadiusBox + 'px', borderColor: borderColor, opacity: opacityBox ? 1 : 0.5 }">
             <p :style="{ color: textColor, fontStyle: typoStyle }" v-show="showTexto">{{ textContent }}</p>
         </div>
     </div>
@@ -70,8 +71,13 @@ export default {
     justify-content: center;
 }
 
-.box {
-    height: 100px;
-    width: 100px;
+.box-none {
+    display: none;
+}
+
+.box-block {
+    display: block;
+    width: 400px;
+    height: 400px;
 }
 </style>
