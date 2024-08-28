@@ -10,6 +10,8 @@ export default {
             borderRadiusBox: '0',
             borderColor: '',
             textContent: '',
+            typoStyle: '',
+            fontStyle: ['normal', 'italic', 'oblique']
         }
     }
 }
@@ -32,10 +34,16 @@ export default {
             <input id="borderColorInput" type="text" v-model="borderColor">
             <label for="textContentInput">Contenido Textual: </label>
             <input id="textContentInput" type="text" v-model="textContent">
+            <label for="typoTextSelect">Tipografía: </label>
+            <select id="typoTextSelect" v-model="typoStyle">
+                <option v-for="(style, idx) in fontStyle" :key="idx" :value="style">{{ style }}</option>
+            </select>
+
+
         </div>
         <div class="box"
             :style="{ backgroundColor: backgroundBox, border: borderBox + 'px solid', borderRadius: borderRadiusBox + 'px', borderColor: borderColor }">
-            <p :style="{ color: textColor }" v-show="showTexto">{{ textContent }}</p>
+            <p :style="{ color: textColor, fontStyle: typoStyle }" v-show="showTexto">{{ textContent }}</p>
         </div>
     </div>
 </template>
