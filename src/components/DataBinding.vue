@@ -12,7 +12,13 @@ export default {
             textContent: '',
             typoStyle: '',
             fontStyle: ['normal', 'italic', 'oblique'],
-            opacityBox: false
+            opacityBox: false,
+            selectedFontSize: 16,
+            sizeFont: [
+                { value: 10, label: 'Pequeño (10px)' },
+                { value: 16, label: 'Mediano (16px)' },
+                { value: 24, label: 'Grande (24px)' },
+            ]
         }
     }
 }
@@ -41,10 +47,20 @@ export default {
             </select>
             <label for="opacityBoxCheck">Opaco: </label>
             <input id="opacityBoxCheck" type="checkbox" v-model="opacityBox">
+
+            <!-- Radios para Tamaño de letra -->
+            <label for="fontSize">Tamaño de letra: </label>
+            <div id="fontSize">
+                <div v-for="(size, idx) in sizeFont" :key="idx">
+                    <input type="radio" :id="'fontSize' + idx" :value="size.value" v-model="selectedFontSize">
+                    <label :for="'fontSize' + idx">{{ size.label }}</label>
+                </div>
+            </div>
         </div>
-        <div :class="{ 'box-block': backgroundBox }" :v-show="!backgroundBox"
+        <div :class="{ 'box-block': backgroundBox }" v-show="backgroundBox"
             :style="{ backgroundColor: backgroundBox, border: borderBox + 'px solid', borderRadius: borderRadiusBox + 'px', borderColor: borderColor, opacity: opacityBox ? 1 : 0.5 }">
-            <p :style="{ color: textColor, fontStyle: typoStyle }" v-show="showTexto">{{ textContent }}</p>
+            <p :style="{ color: textColor, fontStyle: typoStyle, fontSize: selectedFontSize + 'px' }"
+                v-show="showTexto">{{ textContent }}</p>
         </div>
     </div>
 </template>
